@@ -1,10 +1,10 @@
 setup:
-	python -m venv ~/.sba
+	python3 -m venv ~/.sba
   
 install:
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
   
 test:
-	python -m pytest --nbval-lax eda/*.ipynb
+	python3 -m pytest --nbval eda/*.ipynb
   
 all: setup install test
