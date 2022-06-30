@@ -1,5 +1,7 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: linux-64
+jupyterlab==3.4.3
 numpy==1.22.3
 pandas==1.4.2
+pylint==2.12.2
