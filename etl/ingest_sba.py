@@ -28,13 +28,22 @@ def download(year: int):
     logging.info('Data obtained and returned as an object')
     return data
 
-def upload(df, name):
+def upload(bucket_name, contents, storage_name):
     """
     Uploads .csv file that is currently a dataframe held in memory to bucket sba-raw
     df is a pandas datame
     name is the name we'd like to name the object in the GCP bucket
     """
 
-    df.to_csv('gs://bucket/sba-raw')
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(storage_name)
+
+    logging.info('{} being uploaded to bucket {}'.format(bucket_name))
+
+    blob.upload_from_string(contents.to_csv(), 'text/csv')
+
+    logging.info('Upload Complete')
+
 
 
