@@ -1,8 +1,12 @@
-import logging 
+import os
+import logging
 
 import re
 import pandas as pd
 import urllib.request
+
+from google.cloud import storage
+
 
 def download(year: int):
     """
@@ -24,8 +28,13 @@ def download(year: int):
     logging.info('Data obtained and returned as an object')
     return data
 
-def upload_raw(blob):
+def upload(df, name):
     """
     Uploads .csv file that is currently a dataframe held in memory to bucket sba-raw
-    
+    df is a pandas datame
+    name is the name we'd like to name the object in the GCP bucket
     """
+
+    df.to_csv('gs://bucket/sba-raw')
+
+
