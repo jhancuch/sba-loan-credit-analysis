@@ -10,7 +10,7 @@ app = Flask(__name__)
 def ingest_sba():
     try:
         logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
-        json = request.get_json(force=True) # https://stackoverflow.com/questions/53216177/http-triggering-cloud-function-with-cloud-scheduler/60615210#60615210
+        #json = request.get_json(force=True) # https://stackoverflow.com/questions/53216177/http-triggering-cloud-function-with-cloud-scheduler/60615210#60615210
 
         #df_2010 = download(2010)
         df_2020 = download(2020)
