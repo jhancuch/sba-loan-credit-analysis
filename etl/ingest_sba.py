@@ -15,18 +15,24 @@ def download(year: int):
     """
 
     logging.info('Requesting data for 10 year increment starting in {}.'.format(year))
-    
-    webpage_raw = urllib.request.urlopen('https://data.sba.gov/dataset/7-a-504-foia')
-    webpage_bytes = webpage_raw.read()
-    webpage_string = webpage_bytes.decode('utf8')
-    webpage_raw.close()
+    try:
+        webpage_raw = urllib.request.urlopen('https://data.sba.gov/dataset/7-a-504-foia')
+        webpage_bytes = webpage_raw.read()
+        webpage_string = webpage_bytes.decode('utf8')
+        webpage_raw.close()
+    except:
+        logging.info('Unable to download SBA FOIA 7a webpage html.')
 
-    url_string = re.search(r'http.*7afy' + str(year) + '-.*csv', webpage_string)[0]
-    
-    data = pd.read_csv(url_string, encoding = "ISO-8859-1", low_memory = False)
+    try:
+        url_string = re.search(r'http.*7afy' + str(year) + '-.*csv', webpage_string)[0]
+        data = pd.read_csv(url_string, encoding = "ISO-8859-1", low_memory = False)
 
-    logging.info('Data obtained and returned as an object')
-    return data
+        logging.info('Data obtained and returned as an object.')
+        return data
+
+    except:
+        logging.info('Unable to obtain data. Debugging required.')
+
 
 def upload(bucket_name, contents, storage_name):
     """
@@ -34,16 +40,18 @@ def upload(bucket_name, contents, storage_name):
     df is a pandas datame
     name is the name we'd like to name the object in the GCP bucket
     """
+    try:
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(bucket_name)
+        blob = bucket.blob(storage_name)
 
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob(storage_name)
+        logging.info('{} being uploaded to bucket {}.'.format(bucket_name))
 
-    logging.info('{} being uploaded to bucket {}'.format(bucket_name))
+        blob.upload_from_string(contents.to_csv(), 'text/csv')
 
-    blob.upload_from_string(contents.to_csv(), 'text/csv')
-
-    logging.info('Upload Complete')
+        logging.info('Upload Complete.')
+    except:
+        logging.info('Unable to complete upload.')
 
 
 
