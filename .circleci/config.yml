@@ -26,6 +26,8 @@ jobs:
     parallelism: 4
     resource_class: large
     
+    no_output_timeout: 30m
+    
     working_directory: ~/sba-loan-credit-analysis
 
     steps:
