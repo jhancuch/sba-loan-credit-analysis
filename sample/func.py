@@ -1,8 +1,8 @@
 from typing import Dict, List, Union
 
-from google-cloud-aiplatform import aiplatform
-from protobuf import json_format
-from protobuf.struct_pb2 import Value
+from google.cloud.aiplatform_v1beta1.services import prediction_service as prediction_service
+from google.protobuf import json_format
+from google.protobuf.struct_pb2 import Value
 
 def predict_custom_trained_model_sample(
     project: str,
@@ -19,7 +19,7 @@ def predict_custom_trained_model_sample(
     client_options = {"api_endpoint": api_endpoint}
     # Initialize client that will be used to create and send requests.
     # This client only needs to be created once, and can be reused for multiple requests.
-    client = aiplatform.gapic.PredictionServiceClient(client_options=client_options)
+    client = prediction_service.PredictionServiceClient(client_options=client_options)
     # The format of each instance should conform to the deployed model's prediction input schema.
     instances = instances if type(instances) == list else [instances]
     instances = [
