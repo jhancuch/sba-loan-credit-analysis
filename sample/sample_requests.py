@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "sba-loan-credit-analysis-c755ef85ba35.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/mnt/c/Users/jwnha/Documents/_School/MSDS/2022Summer/applicationDev/sba-loan-credit-analysis-c755ef85ba35.json"
 PROJ = "sba-loan-credit-analysis"
 ENDPOINT = "4630368920006557696"
 
