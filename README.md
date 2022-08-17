@@ -29,8 +29,7 @@ make all
 ## Formatting Your Own Submission
 It is recommended that you use the Make file to install the dependencies needed. Second, the user should use the predict_custom_trained_model_sample function in ~/sample/sample_requests.py as the template for their own requests. All the user has to do is update how they want to load the .json file for the "instances" argument.
 
-The input has to be 70 numeric fields 
-
+The input has to be 70 numeric (int and float) fields. A json input should look like the following:
 ```json
 {"RevolverStatus": 1,
  "TermInMonths": 144, 
