@@ -11,5 +11,19 @@ The SBA 7(a) loan is different. While it can be securitized, it can only be for 
 This application allows a potential investor to check the risk of default for each loan within a securitized bond allowing them to verify the overall risk associated with the securitized bond. This concept can also be applied to other securitized bonds where the investor only has information about the loan but not the underlying financials of the borrower.
 
 ## How to Test Run the API
+Step 1: Clone github repository.
+```
+git clone https://github.com/jhancuch/sba-loan-credit-analysis
+```
+
+Step 2: Navigate to the sample folder
+```
+cd sample
+```
+
+Step 3: Run the make file to install dependencies and run the examples.
+```
+make all
+```
 
 ## Formatting Your Own Submission
