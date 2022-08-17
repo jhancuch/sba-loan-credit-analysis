@@ -33,8 +33,8 @@ The input has to be 70 numeric (int and float) fields. A json input should look 
 ```json
 {"RevolverStatus": 1,
  "TermInMonths": 144, 
- "BorrBankSameState": .3, 
- "TotPctDefault": .1,
+ "BorrBankSameState": .30, 
+ "TotPctDefault": .10,
  "YearlyDefaultCounts": 600, 
  "YearlyPctDefault": .12,
  "subpgmdesc__Community Advantage Initiative": 1,
