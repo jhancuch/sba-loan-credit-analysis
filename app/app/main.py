@@ -1,15 +1,21 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response, jsonify, make_response
 import pickle
 from xgboost import XGBClassifier
 import pandas as pd
+import numpy as np
+import re
+
+import google.cloud.logging
+import logging
+
+client = google.cloud.logging.Client()
 
 app = Flask(__name__)
+client.setup_logging()
 
 # Load model
-model_path = "model/model.pkl"
-
-with open(model_path, "rb") as file:
-    model = pickle.load(file)
+model = XGBClassifier()
+model.load_model("model/model.bst")
 
 # Health check route
 @app.route("/statuscheck")
@@ -22,16 +28,18 @@ def status_check():
 @app.route("/predict", methods=["POST"])
 def predict():
     print("/predict request")
-    
-    #data = request.get_json()
 
-    #preds = model.predict(pd.DataFrame(data['instance']))
-    preds = model.predict(pd.DataFrame(request.get_json(), index=[0]))
-    if preds == 1:
-        return_value = 'Default'
-    if preds == 0:
-        return_value = 'No Default'
-    return return_value
+    # gather request json and transform to a list
+    data = request.get_json()
+    json_instances = data["instances"]
+
+    data1 = pd.DataFrame(json_instances, index=[0]).values
+    data2 = list(data1)
+
+    # Classifer the input and return the 1/0 prediction
+    response = model.predict(data2)
+   
+    return jsonify({"predictions": response.tolist()}) 
 
 # Start flask app
 if __name__ == "__main__":

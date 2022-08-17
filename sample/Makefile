@@ -4,7 +4,7 @@ setup:
 install:
 	pip3 install -r requirements.txt
   
-test:
-	python3 -m pytest --nbval-lax sample_requests.py
+run:
+	python3 sample_requests.py
   
-all: setup install test
+all: setup install run
