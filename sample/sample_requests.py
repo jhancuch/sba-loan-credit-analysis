@@ -4,22 +4,23 @@ import numpy as np
 import pandas as pd
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "sba-loan-credit-analysis-c755ef85ba35.json"
-
+PROJ = "sba-loan-credit-analysis"
+ENDPOINT = "4630368920006557696"
 
 predict_custom_trained_model_sample(
-    project="sba-loan-credit-analysis",
-    endpoint_id="4630368920006557696",
+    project=PROJ,
+    endpoint_id=ENDPOINT,
     instances=input1()
 )
 
 predict_custom_trained_model_sample(
-    project="sba-loan-credit-analysis",
-    endpoint_id="4630368920006557696",
+    project=PROJ,
+    endpoint_id=ENDPOINT,
     instances=input2()
 )
 
 predict_custom_trained_model_sample(
-    project="sba-loan-credit-analysis",
-    endpoint_id="4630368920006557696",
+    project=PROJ,
+    endpoint_id=ENDPOINT,
     instances=input3()
 )
