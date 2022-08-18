@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "sba-loan-credit-analysis",
+  "private_key_id": "c755ef85ba35dbe47927cea5abd682b66e535ca2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDiHlyqFPlG2kWQ\nDq0rhOK/xS4AgVrH3YRiEeguH/5S23wdJokhiNGr+NaBCK+PUjhtx9phNJFwSkcR\nX5i9L0uzYajPSrgXC9kga4p/YNNcsr023WiXRuZ2GooivwwSQ2SzP+tQ/twRnALl\n/G2jpb/9BkDULZW3ma4g7Y2dK2a8iX/5KPjbfsyXgoj4Iw83yoWdhz2LBYLQ0K84\nbCKkSqFs14KBeapOgZ1Lgudg9xPJcdWJYc2kUPyzwmy+JpURjg91nafEpvzcd/pA\n/jpxlkGPWSMnL4EXfYjGisazxsX0A7++bjl7fIg6wZo8xTA+QQ+Ab8YRXmAZi3XZ\nbmlyhl2xAgMBAAECggEAKzrVyXiYDdk2GmwL5HmT5kj62gLhCbwKjrtQsdzRASNQ\nL7yJ1Bz1xRSeYe34roRwIGDomdP0iEzTGHm32Fd9+A4QOY1V86YCvWWCBYdL8XmE\nnkQnNmDKN8MsLKds1eMHkhOC2CnZhg5XKYQgq/xI38V9yHLsoDzj4wy3mdhN3HZr\nN9Z9csmshMGFlmxoFH0Wh0NHsZBlqaNQd4cPiOC1H9PKVT5O2rQS66/40Yq6iFqk\nOGuz5DLiecURlu6fWq1HU1wa+Zw15RenQiJ38fM+lMwccuN1dBcz9oFrbH2DsqzL\nqBmdK0W/DO7CdQqqZj/lnLB21fEV1lRO8lXeA5hCKQKBgQD2w7zxaj4hRvhRZ9RI\nCkktWwFQl2HFXHENDhRZiPsHUijUiEwonG8PWiwxnZcv7OnCn5yQbUjwFewO/Rx+\nCJpiDa/LXFdrxc9aGRgcDb3Frm/y9kMB4GA8pImo6metMnkM8Df6ExEMmqU9ItRH\nYyJKrSWEOizsfKZ0CXYaDEOALQKBgQDqlNBQB+TFYHSX3BwY0KjpGpKdV6v4LMAc\nNSk1xjz/sLmRArdt6tqW2xnVWbXtQiU7zlzgnsIJRdY3QrSTvpPU8uhTy9Hr4ZNw\n3u6wLsKPWWSnCFaFSvC20sW2X3wq0vXDscvFrXsjJFbFKhmfAcqfli/wx4ioskYA\nVp6D+z6CFQKBgQCuZlxtCrdqcWwirI0ddReO1JizSqoxAEpt/ZtoRCWWYPy2aLXa\npeTgJszBLC2kE36KrJ/Me1BnTjcNyNmQQahK0H2D7nlik+UeOkoN2bBbvBMm1eE5\nvEiH04nvNeucPuXKvSPyu/L6w3kxIiKBaZDc0k6Hi04gvWAu9ljfw/cY6QKBgQDi\n1tCx81AoBWP5zaFl5bDQ6R9KA5OKQ0vqewXEuFQYNT7cmTHjmq2SH4FVrJCeQ85Z\njO6HTz33VY8WlOylyi6OR+6dyYTPgqzfAtTxjeYaVKleVFPGRXeMczk5aBBcIPAD\nMxUHrQBcNTGrK1DnUAYuWD83qNvftbS3cwuKORRzGQKBgAwF8l8l83epKp9Jc/HJ\nSLcX68lCCA0ZfzBOynlpvKzFPkxhCSZO6uqsoa22Q25cwdXhuGeqSex99m42Dz7x\n8cC3Ws0jUy9wsCeLKmGw7rtaB1vkusHbxLj1n++lZ21Vu86dzrraYNOu2Nj8OnoS\nga8LVoMxsMuFsJjNAKHP6Jv9\n-----END PRIVATE KEY-----\n",
+  "client_email": "vertex-ai-user@sba-loan-credit-analysis.iam.gserviceaccount.com",
+  "client_id": "109115385988224292880",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vertex-ai-user%40sba-loan-credit-analysis.iam.gserviceaccount.com"
+}

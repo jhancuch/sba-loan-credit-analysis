@@ -1,10 +1,10 @@
 from typing import Dict, List, Union
 import random
 
+from google.cloud import storage
 from google.cloud import aiplatform
 from google.protobuf import json_format
 from google.protobuf.struct_pb2 import Value
-
 
 def predict_custom_trained_model_sample(
     project: str,
