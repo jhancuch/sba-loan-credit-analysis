@@ -6,13 +6,13 @@ orbs:
 parameters:
   run-build-app:
     type: boolean
-    default: true
+    default: false
   run-build-eda:
     type: boolean
-    default: true
+    default: false
   run-build-sample:
     type: boolean
-    default: true
+    default: false
 
 workflows:
   service-1:
