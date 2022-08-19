@@ -15,34 +15,28 @@ parameters:
     default: true
 
 jobs:
-  build:
-    executor: python/default
+  build-test-app:
+    docker:
+      - image: cimg/python:3.9.5
+    parallelism: 4
+    resource_class: large
+    working_directory: ~/sba-loan-credit-analysis
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
-      - python/install-packages:
-          pip-dependency-file: requirements.txt
-          pkg-manager: pip
-      - python/install-packages:
-          args: pytest
-          pkg-manager: pip
-          pypi-cache: false
       - run:
+          name: install dependencies
+          no_output_timeout: 30m
           command: |
-            pytest --version
-          name: Test
-  test-app:
-    steps:
-      - run:
-          command: python -m pytest app/app/main.py
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install -r requirements.txt
+            make test_app
 
 workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
-      - build
-      - test-app
+      - build-test-app
 
   service-2:
     when: << pipeline.parameters.run-build-eda >>
