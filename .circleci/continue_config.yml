@@ -19,26 +19,13 @@ workflows:
     when: << pipeline.parameters.run-build-app >>
     jobs:
       - python/test:
-          build:
-            docker:
-              - image: cimg/python:3.9.5
-            parallelism: 4
-            resource_class: large
-            working_directory: ~/sba-loan-credit-analysis
-            steps:
-              - run:
-                  name: install app dependencies
-                  no_output_timeout: 30m
-                  command: |
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    pip3 install -r requirements.txt
-              - run:
-                  name: run app tests
-                  no_output_timeout: 30m
-                  command: |
-                    . venv/bin/activate
-                    make test_app
+          name: test-app
+          no_output_timeout: 30m
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install -r requirements.txt
+            make test_app
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
