@@ -37,48 +37,14 @@ workflows:
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
-      - eda/test:
-          build:
-            docker:
-              - image: cimg/python:3.9.5
-            parallelism: 4
-            resource_class: large
-            working_directory: ~/sba-loan-credit-analysis
-            steps:
-              - run:
-                  name: install eda dependencies
-                  no_output_timeout: 30m
-                  command: |
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    pip3 install -r requirements.txt
-              - run:
-                  name: run eda tests
-                  no_output_timeout: 30m
-                  command: |
-                    . venv/bin/activate
-                    make test_eda
+      - python/test:
+          args: '--dev'
+          pkg-manager: pipenv
+          test-tool: pytest
   service-3:
     when: << pipeline.parameters.run-build-sample >>
     jobs:
-      - eda/test:
-          build:
-            docker:
-              - image: cimg/python:3.9.5
-            parallelism: 4
-            resource_class: large
-            working_directory: ~/sba-loan-credit-analysis
-            steps:
-              - run:
-                  name: install sample dependencies
-                  no_output_timeout: 30m
-                  command: |
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    pip3 install -r requirements.txt
-              - run:
-                  name: run sample tests
-                  no_output_timeout: 30m
-                  command: |
-                    . venv/bin/activate
-                    make test_sample
+      - python/test:
+          args: '--dev'
+          pkg-manager: pipenv
+          test-tool: pytest
