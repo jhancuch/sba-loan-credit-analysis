@@ -39,7 +39,7 @@ workflows:
     jobs:
       - build
       - run:
-          command: make test_app
+          command: python -m pytest app/app/main.py
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
