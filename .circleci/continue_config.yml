@@ -20,7 +20,7 @@ parameters:
   run-build-eda:
     type: boolean
     default: false
-   run-build-sample:
+  run-build-sample:
     type: boolean
     default: false
 
