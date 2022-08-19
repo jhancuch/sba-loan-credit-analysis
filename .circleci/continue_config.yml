@@ -16,15 +16,21 @@ parameters:
 
 jobs:
   build-test-app:
-    working_directory: ~/sba-loan-credit-analysis/app/
+    docker:
+      - image: cimg/python:3.9.5
+    parallelism: 4
+    resource_class: large
+    working_directory: ~/sba-loan-credit-analysis
     steps:
       - checkout
       - run:
-          name: create new container and push
+          name: install dependencies and run tests
           no_output_timeout: 30m
           command: |
-            docker build -t gcr.io/sba-loan-credit-analysis/sba-docker-api .
-            docker push gcr.io/sba-loan-credit-analysis/sba-docker-api
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install -r requirements.txt
+            make test_app
   build-test-eda:
     docker:
       - image: cimg/python:3.9.5
@@ -46,7 +52,7 @@ jobs:
       - image: cimg/python:3.9.5
     parallelism: 4
     resource_class: large
-    working_directory: ~/sba-loan-credit-analysis
+    working_directory: ~/sba-loan-credit-analysis/sample
     steps:
       - checkout
       - run:

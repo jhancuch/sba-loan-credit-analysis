@@ -1,2 +1,5 @@
 docker build -t sba-docker-api .
 docker run -it -p 1234:1234 sba-docker-api
+
+docker build -t gcr.io/sba-loan-credit-analysis/sba-docker-api .
+docker push gcr.io/sba-loan-credit-analysis/sba-docker-api
