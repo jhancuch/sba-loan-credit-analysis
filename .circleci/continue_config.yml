@@ -18,7 +18,7 @@ workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
-      - python/test:
+      - python:
           name: test-app
           command: |
             python3 -m venv venv
