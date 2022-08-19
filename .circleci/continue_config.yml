@@ -18,7 +18,7 @@ workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
-      - circleci/python@1.5.0:
+      - python/test:
           build:
             docker:
               - image: cimg/python:3.9.5
