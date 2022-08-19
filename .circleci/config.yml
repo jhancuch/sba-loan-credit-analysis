@@ -18,24 +18,25 @@ workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
-      build:
-        docker:
-          - image: cimg/python:3.9.5
-      steps:
-        - run:
-            name: install app dependencies
-            no_output_timeout: 30m
-            command: |
-              python3 -m venv venv
-              . venv/bin/activate
-              pip3 install -r requirements.txt
-              make test_app
-        - run:
-            name: run app tests
-            no_output_timeout: 30m
-            command: |
-              . venv/bin/activate
-              make test_app
+      - app/test:
+          build:
+            docker:
+              - image: cimg/python:3.9.5
+            steps:
+              - run:
+                  name: install app dependencies
+                  no_output_timeout: 30m
+                  command: |
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip3 install -r requirements.txt
+                    make test_app
+              - run:
+                  name: run app tests
+                  no_output_timeout: 30m
+                  command: |
+                    . venv/bin/activate
+                    make test_app
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
