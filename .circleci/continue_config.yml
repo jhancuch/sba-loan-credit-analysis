@@ -33,19 +33,13 @@ workflows:
       app-build-test:
         docker:
           - image: cimg/python:3.7
-        machine: true
+
         parallelism: 4
         resource_class: large
         working_directory: ~/sba-loan-credit-analysis
 
         steps:
           - checkout
-          # Download and cache dependencies
-          - restore_cache:
-              keys:
-              - v1-dependencies-{{ checksum "requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-              - v1-dependencies-
           - run:
               name: install app dependencies
               no_output_timeout: 30m
@@ -58,7 +52,6 @@ workflows:
                 - ./venv
               key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-          # run test
           - run:
               name: run app tests
               no_output_timeout: 30m
