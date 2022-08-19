@@ -21,8 +21,6 @@ workflows:
           # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
           mapping: |
             app/app/.* run-build-app true
-            sample/.* run-build-sample true
-            eda/.* run-build-eda true
           base-revision: main
           # this is the path of the configuration we should trigger once
           # path filtering and pipeline parameter value updates are
