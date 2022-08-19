@@ -17,9 +17,12 @@ parameters:
   run-build-app:
     type: boolean
     default: false
-  run-build-scripts:
+  run-build-eda:
     type: boolean
-    default: true
+    default: false
+   run-build-sample:
+    type: boolean
+    default: false
 
 workflows:
   # when pipeline parameter, run-build-service-1-job is true, the
@@ -27,13 +30,13 @@ workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
-        build-test-push:
+      app-build-test:
         docker:
           - image: cimg/python:3.7
-        
+      
         parallelism: 4
         resource_class: large
-        # UPDATE STARTING HERE
+        
         working_directory: ~/sba-loan-credit-analysis
 
         steps:
@@ -45,7 +48,7 @@ workflows:
               # fallback to using the latest cache if no exact match is found
               - v1-dependencies-
           - run:
-              name: install dependencies
+              name: install app dependencies
               no_output_timeout: 30m
               command: |
                 python3 -m venv venv
@@ -58,19 +61,19 @@ workflows:
 
           # run test
           - run:
-              name: run tests
+              name: run app tests
               no_output_timeout: 30m
               command: |
                 . venv/bin/activate
-                make test
+                make test_app
 
   service-2:
-    when: << pipeline.parameters.run-build-scripts >>
+    when: << pipeline.parameters.run-build-eda >>
     jobs:
-        build-test-push:
+      build-test:
         docker:
           - image: cimg/python:3.7
-        
+      
         parallelism: 4
         resource_class: large
         
@@ -85,7 +88,7 @@ workflows:
               # fallback to using the latest cache if no exact match is found
               - v1-dependencies-
           - run:
-              name: install dependencies
+              name: install eda dependencies
               no_output_timeout: 30m
               command: |
                 python3 -m venv venv
@@ -98,8 +101,48 @@ workflows:
 
           # run test
           - run:
-              name: run tests
+              name: run eda tests
               no_output_timeout: 30m
               command: |
                 . venv/bin/activate
-                make test
+                make test_eda
+                
+  service-3:
+    when: << pipeline.parameters.run-build-sample >>
+    jobs:
+      build-test:
+        docker:
+          - image: cimg/python:3.7
+      
+        parallelism: 4
+        resource_class: large
+        
+        working_directory: ~/sba-loan-credit-analysis
+
+        steps:
+          - checkout
+          # Download and cache dependencies
+          - restore_cache:
+              keys:
+              - v1-dependencies-{{ checksum "requirements.txt" }}
+              # fallback to using the latest cache if no exact match is found
+              - v1-dependencies-
+          - run:
+              name: install sample dependencies
+              no_output_timeout: 30m
+              command: |
+                python3 -m venv venv
+                . venv/bin/activate
+                pip3 install -r requirements.txt
+          - save_cache:
+              paths:
+                - ./venv
+              key: v1-dependencies-{{ checksum "requirements.txt" }}
+
+          # run test
+          - run:
+              name: run sample tests
+              no_output_timeout: 30m
+              command: |
+                . venv/bin/activate
+                make test_sample

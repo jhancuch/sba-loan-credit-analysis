@@ -4,10 +4,14 @@ setup:
 install:
 	pip3 install -r requirements.txt
   
-test:
+test_eda:
 	python3 -m pytest --nbval-lax eda/eda_sba_data.ipynb
 	python3 -m pytest --nbval-lax eda/eda_sba_model.ipynb
+
+test_sample:
 	python3 -m pytest sample/sample_requests.py
+	
+test_app:
 	python3 -m pytest app/app/main.py
   
-all: setup install test
+all: setup install test_eda test_sample test_app
