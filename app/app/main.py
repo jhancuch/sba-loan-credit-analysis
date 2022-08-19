@@ -8,10 +8,10 @@ import re
 import google.cloud.logging
 import logging
 
-client = google.cloud.logging.Client()
+#client = google.cloud.logging.Client()
 
 app = Flask(__name__)
-client.setup_logging()
+#client.setup_logging()
 
 # Load model
 model = XGBClassifier()
