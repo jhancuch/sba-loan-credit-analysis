@@ -20,13 +20,13 @@ jobs:
     steps:
       - checkout
       - python/install-packages:
-          pkg-manager: pip3
+          pkg-manager: pip
       - python/install-packages:
           pip-dependency-file: requirements.txt
-          pkg-manager: pip3
+          pkg-manager: pip
       - python/install-packages:
           args: pytest
-          pkg-manager: pip3
+          pkg-manager: pip
           pypi-cache: false
       - run:
           command: |
