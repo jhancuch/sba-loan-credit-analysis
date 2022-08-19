@@ -20,7 +20,7 @@ workflows:
           # line:
           # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
           mapping: |
-            app/app/.* run-build-app true
+            app/app/.* run-build-app true \
             .* run-build-scripts true
           base-revision: main
           # this is the path of the configuration we should trigger once
