@@ -18,85 +18,72 @@ workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
-      build:
-        docker:
-          - image: cimg/python:3.9.5
-      steps:
-        - run:
-            name: install app dependencies
-            no_output_timeout: 30m
-            command: |
-              python3 -m venv venv
-              . venv/bin/activate
-              pip3 install -r requirements.txt
-              make test_app
-        - run:
-            name: run app tests
-            no_output_timeout: 30m
-            command: |
-              . venv/bin/activate
-              make test_app
+      - app/test:
+          build:
+            docker:
+              - image: cimg/python:3.9.5
+            parallelism: 4
+            resource_class: large
+            working_directory: ~/sba-loan-credit-analysis
+            steps:
+              - run:
+                  name: install app dependencies
+                  no_output_timeout: 30m
+                  command: |
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip3 install -r requirements.txt
+              - run:
+                  name: run app tests
+                  no_output_timeout: 30m
+                  command: |
+                    . venv/bin/activate
+                    make test_app
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
-      build:
-        docker:
-          - image: cimg/python:3.9.5
-        parallelism: 4
-        resource_class: large
-        working_directory: ~/sba-loan-credit-analysis
-        steps:
-          - checkout
-          - restore_cache:
-              keys:
-              - v1-dependencies-{{ checksum "requirements.txt" }}
-              - v1-dependencies-
-          - run:
-              name: install eda dependencies
-              no_output_timeout: 30m
-              command: |
-                python3 -m venv venv
-                . venv/bin/activate
-                pip3 install -r requirements.txt
-          - save_cache:
-              paths:
-                - ./venv
-              key: v1-dependencies-{{ checksum "requirements.txt" }}
-          - run:
-              name: run eda tests
-              no_output_timeout: 30m
-              command: |
-                . venv/bin/activate
-                make test_eda            
+      - eda/test:
+          build:
+            docker:
+              - image: cimg/python:3.9.5
+            parallelism: 4
+            resource_class: large
+            working_directory: ~/sba-loan-credit-analysis
+            steps:
+              - run:
+                  name: install eda dependencies
+                  no_output_timeout: 30m
+                  command: |
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip3 install -r requirements.txt
+              - run:
+                  name: run eda tests
+                  no_output_timeout: 30m
+                  command: |
+                    . venv/bin/activate
+                    make test_eda
   service-3:
     when: << pipeline.parameters.run-build-sample >>
     jobs:
-      build-test:
-        docker:
-          - image: cimg/python:3.9.5
-        parallelism: 4
-        resource_class: large
-        working_directory: ~/sba-loan-credit-analysis
-        steps:
-          - checkout
-          - restore_cache:
-              keys:
-              - v1-dependencies-{{ checksum "requirements.txt" }}
-              - v1-dependencies-
-          - run:
-              name: install sample dependencies
-              no_output_timeout: 30m
-              command: |
-                python3 -m venv venv
-                . venv/bin/activate
-                pip3 install -r requirements.txt
-          - save_cache:
-              paths:
-                - ./venv
-              key: v1-dependencies-{{ checksum "requirements.txt" }}
-          - run:
-              name: run sample tests
-              no_output_timeout: 30m
-              command: |
-                . venv/bin/activate
-                make test_sample
+      - eda/test:
+          build:
+            docker:
+              - image: cimg/python:3.9.5
+            parallelism: 4
+            resource_class: large
+            working_directory: ~/sba-loan-credit-analysis
+            steps:
+              - run:
+                  name: install sample dependencies
+                  no_output_timeout: 30m
+                  command: |
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip3 install -r requirements.txt
+              - run:
+                  name: run sample tests
+                  no_output_timeout: 30m
+                  command: |
+                    . venv/bin/activate
+                    make test_sample
