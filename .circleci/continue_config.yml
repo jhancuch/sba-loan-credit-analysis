@@ -15,28 +15,36 @@ parameters:
     default: true
 
 jobs:
-  publish:
+  build:
     executor: python/default
     steps:
       - checkout
-      - python/dist
-      - run: 
+      - python/install-packages:
+          pkg-manager: pip3
+      - python/install-packages:
+          pip-dependency-file: requirements.txt
+          pkg-manager: pip3
+      - python/install-packages:
+          args: pytest
+          pkg-manager: pip3
+          pypi-cache: false
+      - run:
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip3 install -r requirements.txt
+            pytest --version
+          name: Test
 
 workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
-      - python/test:
-          args: '--dev'
-          pkg-manager: pipenv
-          test-tool: pytest
+      - build
+      - run:
+          command: | 
+          make test_app
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
+      - build
       - python/test:
           args: '--dev'
           pkg-manager: pipenv
@@ -44,6 +52,7 @@ workflows:
   service-3:
     when: << pipeline.parameters.run-build-sample >>
     jobs:
+      - build
       - python/test:
           args: '--dev'
           pkg-manager: pipenv
