@@ -14,13 +14,26 @@ parameters:
     type: boolean
     default: true
 
+jobs:
+  publish:
+    executor: python/default
+    steps:
+      - checkout
+      - python/dist
+      - run: 
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install -r requirements.txt
+
 workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
       - python/test:
-          name: test-app
-          command: 'echo test'
+          args: '--dev'
+          pkg-manager: pipenv
+          test-tool: pytest
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
