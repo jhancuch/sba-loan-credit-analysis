@@ -16,13 +16,13 @@ orbs:
 parameters:
   run-build-app:
     type: boolean
-    default: false
+    default: true
   run-build-eda:
     type: boolean
-    default: false
+    default: true
   run-build-sample:
     type: boolean
-    default: false
+    default: true
 
 workflows:
   # when pipeline parameter, run-build-service-1-job is true, the
@@ -30,32 +30,28 @@ workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
-      app-build-test:
-        steps:
-          - checkout
-          - run:
-              name: install app dependencies
-              no_output_timeout: 30m
-              command: |
-                python3 -m venv venv
-                . venv/bin/activate
-                pip3 install -r requirements.txt
-          - save_cache:
-              paths:
-                - ./venv
-              key: v1-dependencies-{{ checksum "requirements.txt" }}
-
-          - run:
-              name: run app tests
-              no_output_timeout: 30m
-              command: |
-                . venv/bin/activate
-                make test_app
+      build:
+        docker:
+          - image: cimg/python:3.7
+      steps:
+        - run:
+            name: install app dependencies
+            no_output_timeout: 30m
+            command: |
+              python3 -m venv venv
+              . venv/bin/activate
+              pip3 install -r requirements.txt
+        - run:
+            name: run app tests
+            no_output_timeout: 30m
+            command: |
+              . venv/bin/activate
+              make test_app
 
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
-      build-test:
+      build:
         docker:
           - image: cimg/python:3.7
       
