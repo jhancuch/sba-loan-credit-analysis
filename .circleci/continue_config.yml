@@ -31,16 +31,8 @@ workflows:
     when: << pipeline.parameters.run-build-app >>
     jobs:
       app-build-test:
-        docker:
-          - image: cimg/python:3.7
-
-        parallelism: 4
-        resource_class: large
-        working_directory: ~/sba-loan-credit-analysis
-
         steps:
           - checkout
-          - run: echo "Typical build job"
           - run:
               name: install app dependencies
               no_output_timeout: 30m
