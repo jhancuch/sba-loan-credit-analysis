@@ -32,8 +32,6 @@ jobs:
           command: |
             pytest --version
           name: Test
-
-jobs:
   test-app:
     steps:
       - run:
