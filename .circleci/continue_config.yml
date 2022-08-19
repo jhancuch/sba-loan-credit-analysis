@@ -33,13 +33,19 @@ jobs:
             pytest --version
           name: Test
 
+jobs:
+  test-app:
+    steps:
+      - run:
+          command: python -m pytest app/app/main.py
+
 workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
     jobs:
       - build
-      - run:
-          command: python -m pytest app/app/main.py
+      - test-app
+
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
