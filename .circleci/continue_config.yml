@@ -20,7 +20,11 @@ workflows:
     jobs:
       - python/test:
           name: test-app
-          command: 'python3 -m venv venv \. venv/bin/activate \ pip3 install -r requirements.txt \ make test_app'
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install -r requirements.txt
+            make test_app'
   service-2:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
