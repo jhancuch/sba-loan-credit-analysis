@@ -40,6 +40,7 @@ workflows:
 
         steps:
           - checkout
+          - run: echo "Typical build job"
           - run:
               name: install app dependencies
               no_output_timeout: 30m
