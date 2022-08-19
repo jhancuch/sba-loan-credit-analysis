@@ -24,7 +24,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install dependencies
+          name: install dependencies and run tests
           no_output_timeout: 30m
           command: |
             python3 -m venv venv
@@ -36,11 +36,11 @@ jobs:
       - image: cimg/python:3.9.5
     parallelism: 4
     resource_class: large
-    working_directory: ~/sba-loan-credit-analysis
+    working_directory: ~/sba-loan-credit-analysis/sample
     steps:
       - checkout
       - run:
-          name: install dependencies
+          name: install dependencies and run tests
           no_output_timeout: 30m
           command: |
             python3 -m venv venv
@@ -56,7 +56,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install dependencies
+          name: install dependencies and run tests
           no_output_timeout: 30m
           command: |
             python3 -m venv venv

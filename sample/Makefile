@@ -6,5 +6,8 @@ install:
   
 run:
 	python3 sample_requests.py
+	
+test:
+	python3 -m pytest sample/sample_requests.py
   
 all: setup install run
