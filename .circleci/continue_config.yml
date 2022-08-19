@@ -20,7 +20,8 @@ jobs:
       - image: cimg/python:3.9.5
     parallelism: 4
     resource_class: large
-
+    steps:
+      -  run: echo "test"
 
 workflows:
   service-1:
