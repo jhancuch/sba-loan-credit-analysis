@@ -10,6 +10,7 @@ test_eda:
 
 test_sample:
 	python3 -m pylint sample/sample_requests.py
+	python3 -m pylint sample/func.py
 	
 test_app:
 	python3 -m pylint app/app/main.py

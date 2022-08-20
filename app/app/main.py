@@ -1,3 +1,7 @@
+"""
+main.py is the main part of the flask application that serves predictions back of default/
+no default
+"""
 import google.cloud.logging
 from flask import Flask, request, Response, jsonify
 from xgboost import XGBClassifier
@@ -16,7 +20,8 @@ model.load_model("model/model.bst")
 @app.route("/statuscheck")
 def status_check():
     """
-    Vertex AI models requires an app route to send periodic messages to/check the health of the application
+    Vertex AI models requires an app route to send periodic messages to/check the health of the 
+    application
     """
     print("/statuscheck request")
     status_code = Response(status=200)

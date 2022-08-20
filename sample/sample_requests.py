@@ -1,5 +1,9 @@
-from func import predict_custom_trained_model_sample, input1, input2, input3
+"""
+template that sends three requests to the API endpoint and returns the prediction of
+default/no default
+"""
 import os
+from func import predict_custom_trained_model_sample, input1, input2, input3
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "sba-loan-credit-analysis-c755ef85ba35.json"
 PROJ = "sba-loan-credit-analysis"

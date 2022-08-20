@@ -1,3 +1,8 @@
+"""
+func.py contains the main function that interacts with the GCP API and the three
+sample requests that are sent
+"""
+
 from typing import Dict, List, Union
 import random
 
