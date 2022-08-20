@@ -20,7 +20,7 @@ model.load_model("model/model.bst")
 @app.route("/statuscheck")
 def status_check():
     """
-    Vertex AI models requires an app route to send periodic messages to/check the health of the 
+    Vertex AI models requires an app route to send periodic messages to/check the health of the
     application
     """
     print("/statuscheck request")
