@@ -9,9 +9,9 @@ test_eda:
 	python3 -m pytest --nbval-lax eda/eda_sba_model.ipynb
 
 test_sample:
-	python3 -m pytest sample/sample_requests.py
+	python3 -m pylint sample/sample_requests.py
 	
 test_app:
-	python3 -m pytest app/app/main.py
+	python3 -m pylint app/app/main.py
   
 all: setup install test_eda test_sample test_app
