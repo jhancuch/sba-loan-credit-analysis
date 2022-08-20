@@ -10,4 +10,4 @@ run:
 test:
 	python3 -m pylint sample_requests.py
   
-all: setup install run
+all: setup install test run

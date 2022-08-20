@@ -1,17 +1,12 @@
-from flask import Flask, request, Response, jsonify, make_response
-import pickle
+import google.cloud.logging
+from flask import Flask, request, Response, jsonify
 from xgboost import XGBClassifier
 import pandas as pd
-import numpy as np
-import re
 
-import google.cloud.logging
-import logging
-
-#client = google.cloud.logging.Client()
+client = google.cloud.logging.Client()
 
 app = Flask(__name__)
-#client.setup_logging()
+client.setup_logging()
 
 # Load model
 model = XGBClassifier()
@@ -38,8 +33,8 @@ def predict():
 
     # Classifer the input and return the 1/0 prediction
     response = model.predict(data2)
-   
-    return jsonify({"predictions": response.tolist()}) 
+
+    return jsonify({"predictions": response.tolist()})
 
 # Start flask app
 if __name__ == "__main__":
