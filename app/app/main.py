@@ -15,6 +15,9 @@ model.load_model("model/model.bst")
 # Health check route
 @app.route("/statuscheck")
 def status_check():
+    """
+    Vertex AI models requires an app route to send periodic messages to/check the health of the application
+    """
     print("/statuscheck request")
     status_code = Response(status=200)
     return status_code
@@ -22,6 +25,9 @@ def status_check():
 # Predict route
 @app.route("/predict", methods=["POST"])
 def predict():
+    """
+    Main route of the model that gets the request and delievers the prediction back to the users
+    """
     print("/predict request")
 
     # gather request json and transform to a list

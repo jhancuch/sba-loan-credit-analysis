@@ -100,7 +100,8 @@ jobs:
           no_output_timeout: 30m
           command: |
             . venv/bin/activate
-            make sample_eda
+            make test_sample
+
 workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
