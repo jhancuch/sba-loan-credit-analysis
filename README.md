@@ -21,22 +21,24 @@ curl --request POST 'https://sba-loan-credit-analysis.uk.r.appspot.com/predict' 
 ## Formatting Your Own Submission
 The user can easily modify this cURL request to fit their needs. The JSON input has 16 numeric (int and float) fields. An example JSON input that is formatted is below for the users ease/convience of editing it for their own cURL request.
 ```json
-'{
-  "instances": [{
-    "RevolverStatus":1,
-    "TermInMonths":144,
-    "InitialInterestRate":6.00,
-    "BorrBankSameState":0.30,
-    "TotPctDefault":0.15,
-    "TotDefaultCounts":610,
-    "TotLoanCounts":5000,
-    "YearlyLoanCounts":233,
-    "YearlyDefaultCounts":32,
-    "CumulativeDefault":600,
-    "CumulativeLoansIssued":4000,
-    "YearlyPctDefault":0.12,
-    "CumulativeYearlyPctDefault":0.18,
-    "subpgmdesc_community_express":0,
-    "Year2006":0,
-    "Year2007":0}]}'
+{
+	"instances": [{
+		"RevolverStatus":1,
+		"TermInMonths":144,
+		"InitialInterestRate":6.00,
+		"BorrBankSameState":0.30,
+		"TotPctDefault":0.15,
+		"TotDefaultCounts":610,
+		"TotLoanCounts":5000,
+		"YearlyLoanCounts":233,
+		"YearlyDefaultCounts":32,
+		"CumulativeDefault":600,
+		"CumulativeLoansIssued":4000,
+		"YearlyPctDefault":0.12,
+		"CumulativeYearlyPctDefault":0.18,
+		"subpgmdesc_community_express":0,
+		"Year2006":0,
+		"Year2007":0
+	}]
+}'
 ```
