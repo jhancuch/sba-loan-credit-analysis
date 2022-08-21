@@ -10,6 +10,9 @@ parameters:
   run-build-eda:
     type: boolean
     default: true
+  run-build-model:
+    type: boolean
+    default: true
 
 jobs:
 
@@ -73,6 +76,35 @@ jobs:
             . venv/bin/activate
             make test_eda
 
+  build-test-model:
+    docker:
+      - image: cimg/python:3.9.5
+    parallelism: 4
+    resource_class: large
+    working_directory: ~/sba-loan-credit-analysis
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "requirements.txt" }}
+          - v1-dependencies-
+      - run:
+          name: install dependencies
+          no_output_timeout: 30m
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install -r requirements.txt
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
+      - run:
+          name: eda test
+          no_output_timeout: 30m
+          command: |
+            . venv/bin/activate
+            make test_model
 workflows:
   service-1:
     when: << pipeline.parameters.run-build-app >>
@@ -83,3 +115,8 @@ workflows:
     when: << pipeline.parameters.run-build-eda >>
     jobs:
       - build-test-eda
+
+  service-3:
+    when: << pipeline.parameters.run-build-model >>
+    jobs:
+      - build-test-model
