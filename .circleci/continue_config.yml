@@ -90,7 +90,7 @@ jobs:
           - v1-dependencies-
       - run:
           name: install dependencies
-          no_output_timeout: 30m
+          no_output_timeout: 45m
           command: |
             python3 -m venv venv
             . venv/bin/activate
