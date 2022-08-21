@@ -6,13 +6,13 @@ orbs:
 parameters:
   run-build-app:
     type: boolean
-    default: true
+    default: false
   run-build-eda:
     type: boolean
-    default: true
+    default: false
   run-build-model:
     type: boolean
-    default: true
+    default: false
 
 jobs:
 
@@ -100,7 +100,7 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
       - run:
-          name: eda test
+          name: model test
           no_output_timeout: 30m
           command: |
             . venv/bin/activate
