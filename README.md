@@ -11,7 +11,7 @@ The SBA 7(a) loan is different. While it can be securitized, it can only be for 
 This application allows a potential investor to check the risk of default for each loan within a securitized bond allowing them to verify the overall risk associated with the securitized bond. This concept can also be applied to other securitized bonds where the investor only has information about the loan but not the underlying financials of the borrower.
 
 ## How to Test Run the API
-Submit the following cURL command.
+Submit the following cURL command
 ```
 curl --request POST 'https://sba-loan-credit-analysis.uk.r.appspot.com/predict' \
 --header 'Content-Type:application/json' \
