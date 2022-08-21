@@ -3,7 +3,7 @@ main.py is the main part of the flask application that serves predictions back o
 no default
 """
 import google.cloud.logging
-from flask import Flask, request, Response, jsonify, render_template
+from flask import Flask, request, jsonify, render_template
 from xgboost import XGBClassifier
 import pandas as pd
 
