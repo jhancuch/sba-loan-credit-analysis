@@ -1,0 +1,11 @@
+# PyBuilder
+.pybuilder/
+
+# Pytest
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Credentials
+sba-loan-credit-analysis-c755ef85ba35.json
