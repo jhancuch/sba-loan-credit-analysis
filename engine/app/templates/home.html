@@ -1,0 +1,86 @@
+<h3>
+SBA 7(a) Loan Default Predictor
+</h3>
+
+	<p>
+	This API uses a trained model using public SBA 7(a) loan data. The model serves predictions 
+	using the GCP App Engine through API POST requests. The model predicts if a borrower will
+	default on their loan utilizing the following dependent variables:
+	</p>
+
+		<ol>
+			<li>Revolving loan status (int)</li>
+			<li>Term in months (int)</li>
+			<li>Initial interest rate (float)</li>
+			<li>Borrower and bank reside in same state (int)</li>
+			<li>Historical total pecent a bank's loans resulting in default (float)</li>
+			<li>Historical total number of defaulted loans for a bank (int)</li>
+			<li>Historical total Number of loans issued by a bank (int)</li>
+			<li>Total number of loans issued by a bank by year (int)</li>
+			<li>Total number of defaulted loans for a bank by year (int)</li>
+			<li>Cumaltive number of defaulted loans for a bank for each year plus the previous years (int)</li>
+			<li>Cumaltive number of loans issued by a bank for each year plus the previous years (int)</li>
+			<li>Yearly percent default rate of loans issued by a bank (float)</li>
+			<li>Cumaltive default rate</li>
+			<li>Was the loan issued under the Community Express Program (int)</li>
+			<li>Was the loan issued in 2006 (int)</li>
+			<li>Was the loan issued in 2007 (int)</li>
+		</ol>
+
+
+<h3>
+Instructions
+</h3>
+
+	<p>
+	The API accepts only a POST request.
+	</p>
+
+		<h5>
+		POST Request with Example Values
+		</h5>
+		
+			<p>
+			'{
+				"instances": [{
+					"RevolverStatus":1,
+					"TermInMonths":144,
+					"InitialInterestRate":6.00,
+					"BorrBankSameState":0.30,
+					"TotPctDefault":0.15,
+					"TotDefaultCounts":610,
+					"TotLoanCounts":5000,
+					"YearlyLoanCounts":233,
+					"YearlyDefaultCounts":32,
+					"CumulativeDefault":600,
+					"CumulativeLoansIssued":4000,
+					"YearlyPctDefault":0.12,
+					"CumulativeYearlyPctDefault":0.18,
+					"subpgmdesc_community_express":0,
+					"Year2006":0,
+					"Year2007":0
+				}]
+			}'
+			</p>
+		
+		<h5>
+		cURL POST Request Example
+		</h5>
+		
+			<p>
+			curl --request POST 'https://sba-loan-credit-analysis.uk.r.appspot.com/predict' \
+			--header 'Content-Type:application/json' \
+			--data '{"instances": [{"RevolverStatus":1,"TermInMonths":144,"InitialInterestRate":6.00,"BorrBankSameState":0.30,"TotPctDefault":0.15,"TotDefaultCounts":610,"TotLoanCounts":5000,"YearlyLoanCounts":233,"YearlyDefaultCounts":32,"CumulativeDefault":600,"CumulativeLoansIssued":4000,"YearlyPctDefault":0.12,"CumulativeYearlyPctDefault":0.18,"subpgmdesc_community_express":0,"Year2006":0,"Year2007":0}]}'
+			</p>
+			
+		<h5>
+		cURL POST Request Response Example
+		</h5>
+		
+			<p>
+			{"predictions":"No default (0)"}
+			
+			OR
+			
+			{"predictions":"Default (1)"}
+			</p>
